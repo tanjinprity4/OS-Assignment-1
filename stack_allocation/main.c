@@ -2,8 +2,6 @@
 // 
 // (Bad) stack allocation example.
 // 
-// Nitsan Shai
-// nshai@google.com
 
 #include <stdio.h>
 
@@ -32,11 +30,11 @@ void make_other_things() {
 
 int main() {
   tree_t *t1 = make_tree(3);
-  printf("The value of t1 is %d\n", t1->value);  // prints 3
+  printf("The value of t1 is %d\n", t1->value);
 
   tree_t *t2 = make_tree(4); // t2 Reuses the same memory as t1.
-  printf("The value of t2 is %d, not surprising\n", t2->value);  //prints 4
-  printf("But the value of t1 is now %d!\n", t1->value);  // prints 4. value of t1 gone after the end of make_tree() function.
+  printf("The value of t2 is %d, not surprising\n", t2->value);
+  printf("But the value of t1 is now %d!\n", t1->value); // Value of t1 gone after the end of make_tree() function.
 
   printf("Making other things...\n");
   make_other_things();
@@ -45,3 +43,14 @@ int main() {
   printf("And the value of t2 is %d\n", t2->value);
   return 0;
 }
+
+/***
+ * Output: 
+ * The value of t1 is 3
+ * The value of t2 is 4, not surprising
+ * But the value of t1 is now 4!
+ * Making other things...
+ * Even worse, the value of t1 is now 1763731310
+ * And the value of t2 is 1763731310
+*/
+

@@ -2,8 +2,6 @@
 // 
 // Heap allocation example.
 // 
-// Nitsan Shai
-// nshai@google.com
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,19 +47,29 @@ void make_other_things() {
 
 int main() {
   tree_t *t1 = make_tree(3);
-  printf("The value of t1 is %d\n", t1->value);  //print 3
+  printf("The value of t1 is %d\n", t1->value); 
 
   tree_t *t2 = make_tree(4);  // Allocates new address for t2.
-  printf("The value of t2 is %d, not surprising\n", t2->value);  // print 4
-  printf("But the value of t1 is now %d!\n", t1->value);  //print 3. 
+  printf("The value of t2 is %d, not surprising\n", t2->value);
+  printf("But the value of t1 is now %d!\n", t1->value);
 
   printf("Making other things...\n");
   make_other_things();
 
-  printf("Even worse, the value of t1 is now %d\n", t1->value);  // print 3
-  printf("And the value of t2 is %d\n", t2->value);  // print 4
+  printf("Even worse, the value of t1 is now %d\n", t1->value);
+  printf("And the value of t2 is %d\n", t2->value);
   
   free_tree(t1);
   free_tree(t2);
   return 0;
 }
+
+/***
+ * Output:
+ * The value of t1 is 3
+ * The value of t2 is 4, not surprising
+ * But the value of t1 is now 3!
+ * Making other things...
+ * Even worse, the value of t1 is now 3
+ * And the value of t2 is 4
+ * /
